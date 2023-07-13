@@ -1,9 +1,5 @@
 <?php
 
-use App\Http\Livewire\HomeComponent;
-use App\Http\Livewire\ShopComponent;
-use App\Http\Livewire\CartComponent;
-use App\Http\Livewire\CheckoutComponent;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,14 +13,23 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+Route::get('/taste', function () {
+    return view('welcome');
+});
 
-Route::get('/', HomeComponent::class)->name('home.index');
+// Route::get('/', HomeController::class)->name('home.index');
+// Route::get('/', [HomeController::class, 'index']);
+Route::get('/', ['as' => 'homesss','uses' => 'App\Http\Controllers\HomeController@index']);
+Route::get('/home', 'App\Http\Controllers\HomeController@index')->name('home');
+// Route::get('/', 'App\Http\Controllers\HomeController@index');
 
-Route::get('/shop', ShopComponent::class)->name('shop');
+Auth::routes([
+  'reset' => false, // Password Reset Routes...
+  'verify' => false // Email Verification Routes...
+]);
 
-Route::get('/cart', CartComponent::class)->name('shop.cart');
+// Route::get('/shop', ShopComponent::class)->name('shop');
 
-Route::get('/checkout', CheckoutComponent::class)->name('shop.checkout');
+// Route::get('/cart', CartComponent::class)->name('shop.cart');
+
+// Route::get('/checkout', CheckoutComponent::class)->name('shop.checkout');
