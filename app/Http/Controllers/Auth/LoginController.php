@@ -55,12 +55,13 @@ class LoginController extends Controller
       return redirect('/login');
     }
 
-    public function showLoginForm() {
-      return view('auth.login');
-    }
+    // public function showLoginForm() {
+    //   return view('auth.login');
+    // }
 
-    public function login() {
-      return redirect('/login');
-    }
+    // public function login() {
+    //   // return redirect('/login');
+    //   return view('auth.login');
+    // }
 
 }

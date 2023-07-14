@@ -27,6 +27,7 @@ Auth::routes([
   'reset' => false, // Password Reset Routes...
   'verify' => false // Email Verification Routes...
 ]);
+Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
 
 // Route::get('/shop', ShopComponent::class)->name('shop');
 
