@@ -31,7 +31,7 @@
                                             <li><a href="#"><img src="assets/imgs/theme/flag-dt.png" alt="">Deutsch</a></li>
                                             <li><a href="#"><img src="assets/imgs/theme/flag-ru.png" alt="">Pусский</a></li>
                                         </ul>
-                                    </li>                                
+                                    </li>
                                 </ul>
                             </div>
                         </div>
@@ -50,10 +50,12 @@
                             <div class="header-info header-info-right">
                                 <ul>                                
                                     @if(Auth::user())
-                                        <li> {{Auth::user()->name}} <form action="{{route('logout')}}" method="POST">
-                                                        @csrf
-                                                        <a href="{{route('logout')}}" onclick="event.preventDefault(); this.closest('form').submit();">Logout</a>
-                                                    </form></li>
+                                        <li> {{Auth::user()->name}}
+                                            <form action="{{route('logout')}}" method="POST">
+                                                @csrf
+                                                <a href="{{route('logout')}}" onclick="event.preventDefault(); this.closest('form').submit();">Logout</a>
+                                            </form>
+                                        </li>
                                     @else
                                         <li><i class="fi-rs-key"></i><a href="{{ route('login')}}">Log In </a>  / <a href="{{ route('register')}}">Sign Up</a></li>
                                     @endif
@@ -385,6 +387,7 @@
                                         </li>
                                         <li><a href="blog.html">Blog </a></li>                                    
                                         <li><a href="contact.html">Contact</a></li>
+                                        @if(Auth::user() && Auth::user()->user_type == 'ADM')
                                         <li><a href="#">My Account<i class="fi-rs-angle-down"></i></a>
                                             <ul class="sub-menu">
                                                 <li><a href="#">Dashboard</a></li>
@@ -393,14 +396,16 @@
                                                 <li><a href="#">Coupons</a></li>
                                                 <li><a href="#">Orders</a></li>
                                                 <li><a href="#">Customers</a></li>
-                                                <li>
-                                                    <form action="{{route('logout')}}" method="POST">
-                                                        @csrf
-                                                        <a href="{{route('logout')}}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
-                                                    </form>
-                                                </li>                                            
+                                                <li><a href="{{route('logout')}}" >Logout</a></li>
                                             </ul>
                                         </li>
+                                        @elseif(Auth::user())
+                                        <li><a href="#">My Account<i class="fi-rs-angle-down"></i></a>
+                                            <ul class="sub-menu">
+                                                <li><a href="#">Dashboard</a></li>
+                                            </ul>
+                                        </li>
+                                        @endif
                                     </ul>
                                 </nav>
                             </div>
