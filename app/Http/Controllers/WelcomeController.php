@@ -3,14 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Product;
 
 class WelcomeController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
+    protected $slug;
+
     public function __construct()
     {
         // $this->middleware('auth');
@@ -23,8 +21,36 @@ class WelcomeController extends Controller
 
     public function shop()
     {
-        return view('layouts.components.shop_component');
+        $result = Product::paginate(12);
+        return view('layouts.components.shop_component')
+                ->with('result', $result);
     }
+
+    //product details
+    public function productDetail($slug)
+    {
+        $result = Product::where('slug', $slug)->first();
+        $reltvProducts = Product::where('category_id', $result->category_id)->inRandomOrder()->limit(5)->get();
+        $newProducts = Product::latest()->take(4)->get();
+        // dd($newProducts);
+        return view('layouts.components.product_details')
+              ->with('product', $result)
+              ->with('reltvProducts', $reltvProducts)
+              ->with('newProducts', $newProducts);
+    }
+
+    // public function render()
+    // {
+    //     $result = Product::where('slug', $this->slug)->first();
+    //     dd($result);
+    //     return view('layouts.components.product_detail',['product' => $result]);
+    // }
+
+    // this is default product detail page
+    // public function productDetail()
+    // {
+    //     return view('layouts.components.product_detail');
+    // }
 
     public function about()
     {
@@ -64,11 +90,6 @@ class WelcomeController extends Controller
     public function privacyPolicy()
     {
         return view('layouts.components.privacy_policy');
-    }
-
-    public function productDetail()
-    {
-        return view('layouts.components.product_detail');
     }
 
     public function termsConditions()
