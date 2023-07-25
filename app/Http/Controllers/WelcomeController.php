@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Product;
+use Cart;
 
 class WelcomeController extends Controller
 {
@@ -24,6 +25,14 @@ class WelcomeController extends Controller
         $result = Product::paginate(12);
         return view('layouts.components.shop_component')
                 ->with('result', $result);
+    }
+
+    public function store($product_id, $product_name, $product_price)
+    {
+        // code...
+        Cart::add($product_id,$product_name,1,$product_price)->associate('App\Models\Product');
+        session()->flash('success_message','Item added in cart');
+        return redirect()->route('cart');
     }
 
     //product details

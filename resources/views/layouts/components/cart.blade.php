@@ -1,3 +1,4 @@
+<?php dd(Cart::all()); ?>
 @extends('layouts.master')
 
 @section('content')
@@ -28,27 +29,31 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td class="image product-thumbnail"><img src="{{asset('assets/imgs/shop/product-1-2.jpg')}}" alt="#"></td>
-                                    <td class="product-des product-name">
-                                        <h5 class="product-name"><a href="product-details.html">J.Crew Mercantile Women's Short-Sleeve</a></h5>
-                                        <p class="font-xs">Maboriosam in a tonto nesciung eget<br> distingy magndapibus.
-                                        </p>
-                                    </td>
-                                    <td class="price" data-title="Price"><span>$65.00 </span></td>
-                                    <td class="text-center" data-title="Stock">
-                                        <div class="detail-qty border radius  m-auto">
-                                            <a href="#" class="qty-down"><i class="fi-rs-angle-small-down"></i></a>
-                                            <span class="qty-val">1</span>
-                                            <a href="#" class="qty-up"><i class="fi-rs-angle-small-up"></i></a>
-                                        </div>
-                                    </td>
-                                    <td class="text-right" data-title="Cart">
-                                        <span>$65.00 </span>
-                                    </td>
-                                    <td class="action" data-title="Remove"><a href="#" class="text-muted"><i class="fi-rs-trash"></i></a></td>
-                                </tr>
-                                <tr>
+                                @if(Cart::count() > 0)
+                                    <tr>
+                                        <td class="image product-thumbnail"><img src="{{asset('assets/imgs/shop/product-1-2.jpg')}}" alt="#"></td>
+                                        <td class="product-des product-name">
+                                            <h5 class="product-name"><a href="product-details.html">J.Crew Mercantile Women's Short-Sleeve</a></h5>
+                                            <p class="font-xs">Maboriosam in a tonto nesciung eget<br> distingy magndapibus.
+                                            </p>
+                                        </td>
+                                        <td class="price" data-title="Price"><span>$65.00 </span></td>
+                                        <td class="text-center" data-title="Stock">
+                                            <div class="detail-qty border radius  m-auto">
+                                                <a href="#" class="qty-down"><i class="fi-rs-angle-small-down"></i></a>
+                                                <span class="qty-val">1</span>
+                                                <a href="#" class="qty-up"><i class="fi-rs-angle-small-up"></i></a>
+                                            </div>
+                                        </td>
+                                        <td class="text-right" data-title="Cart">
+                                            <span>$65.00 </span>
+                                        </td>
+                                        <td class="action" data-title="Remove"><a href="#" class="text-muted"><i class="fi-rs-trash"></i></a></td>
+                                    </tr>
+                                @else
+                                    <p>No Card Items found.</p>
+                                @endif
+                                <!-- <tr>
                                     <td class="image"><img src="{{asset('assets/imgs/shop/product-11-2.jpg')}}" alt="#"></td>
                                     <td class="product-des">
                                         <h5 class="product-name"><a href="product-details.html">Amazon Essentials Women's Tank</a></h5>
@@ -86,7 +91,7 @@
                                         <span>$62.00 </span>
                                     </td>
                                     <td class="action" data-title="Remove"><a href="#" class="text-muted"><i class="fi-rs-trash"></i></a></td>
-                                </tr>
+                                </tr> -->
                                 <tr>
                                     <td colspan="6" class="text-end">
                                         <a href="#" class="text-muted"> <i class="fi-rs-cross-small"></i> Clear Cart</a>
