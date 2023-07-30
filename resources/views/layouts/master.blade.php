@@ -3,7 +3,7 @@
 
     <head>
         <meta charset="utf-8">
-        <title>Surfside Media</title>
+        <title>Sport Cart</title>
         <meta http-equiv="x-ua-compatible" content="ie=edge">
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -15,6 +15,7 @@
         <meta http-equiv="refresh" content="3600;url={{route('logout')}}" />
         <link rel="stylesheet" href="{{ asset('assets/css/main.css') }}">
         <link rel="stylesheet" href="{{ asset('assets/css/custom.css') }}">
+        @yield('css')
     </head>
     <body>
         <header class="header-area header-style-1 header-height-2">
@@ -69,7 +70,7 @@
                 <div class="container">
                     <div class="header-wrap">
                         <div class="logo logo-width-1">
-                            <a href="index.html"><img src="{{asset('assets/imgs/logo/logo.png')}}" alt="logo"></a>
+                            <a href="{{route('home')}}"><img src="{{asset('assets/imgs/logo/logo.png')}}" alt="logo"></a>
                         </div>
                         <div class="header-right">
                             <div class="search-style-1">
@@ -81,53 +82,11 @@
                                 <div class="header-action-2">
                                     <div class="header-action-icon-2">
                                         <a href="shop-wishlist.php">
-                                            <img class="svgInject" alt="Surfside Media" src="{{asset('assets/imgs/theme/icons/icon-heart.svg')}}">
+                                            <img class="svgInject" alt="Sport Cart" src="{{asset('assets/imgs/theme/icons/icon-heart.svg')}}">
                                             <span class="pro-count blue">4</span>
                                         </a>
                                     </div>
-                                    <div class="header-action-icon-2">
-                                        <a class="mini-cart-icon" href="cart.html">
-                                            <img alt="Surfside Media" src="{{asset('assets/imgs/theme/icons/icon-cart.svg')}}">
-                                            <span class="pro-count blue">2</span>
-                                        </a>
-                                        <div class="cart-dropdown-wrap cart-dropdown-hm2">
-                                            <ul>
-                                                <li>
-                                                    <div class="shopping-cart-img">
-                                                        <a href="product-details.html"><img alt="Surfside Media" src="{{asset('assets/imgs/shop/thumbnail-3.jpg')}}"></a>
-                                                    </div>
-                                                    <div class="shopping-cart-title">
-                                                        <h4><a href="product-details.html">Daisy Casual Bag</a></h4>
-                                                        <h4><span>1 × </span>$800.00</h4>
-                                                    </div>
-                                                    <div class="shopping-cart-delete">
-                                                        <a href="#"><i class="fi-rs-cross-small"></i></a>
-                                                    </div>
-                                                </li>
-                                                <li>
-                                                    <div class="shopping-cart-img">
-                                                        <a href="product-details.html"><img alt="Surfside Media" src="{{asset('assets/imgs/shop/thumbnail-2.jpg')}}"></a>
-                                                    </div>
-                                                    <div class="shopping-cart-title">
-                                                        <h4><a href="product-details.html">Corduroy Shirts</a></h4>
-                                                        <h4><span>1 × </span>$3200.00</h4>
-                                                    </div>
-                                                    <div class="shopping-cart-delete">
-                                                        <a href="#"><i class="fi-rs-cross-small"></i></a>
-                                                    </div>
-                                                </li>
-                                            </ul>
-                                            <div class="shopping-cart-footer">
-                                                <div class="shopping-cart-total">
-                                                    <h4>Total <span>$4000.00</span></h4>
-                                                </div>
-                                                <div class="shopping-cart-button">
-                                                    <a href="cart.html" class="outline">View cart</a>
-                                                    <a href="checkout.html">Checkout</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    @include('layouts.components.cart-icons')
                                 </div>
                             </div>
                         </div>
@@ -328,7 +287,7 @@
                                         <li><a class="active" href="{{ route('homesss')}}">Home </a></li>
                                         <li><a href="{{route('about')}}">About</a></li>
                                         <li><a href="{{ route('shop') }}">Shop</a></li>
-                                        <li class="position-static"><a href="#">Our Collections <i class="fi-rs-angle-down"></i></a>
+                                        <!-- <li class="position-static"><a href="#">Our Collections <i class="fi-rs-angle-down"></i></a>
                                             <ul class="mega-menu">
                                                 <li class="sub-mega-menu sub-mega-menu-width-22">
                                                     <a class="menu-title" href="#">Women's Fashion</a>
@@ -364,7 +323,7 @@
                                                 </li>
                                                 <li class="sub-mega-menu sub-mega-menu-width-34">
                                                     <div class="menu-banner-wrap">
-                                                        <a href="product-details.html"><img src="{{asset('assets/imgs/banner/menu-banner.jpg')}}" alt="Surfside Media"></a>
+                                                        <a href="product-details.html"><img src="{{asset('assets/imgs/banner/menu-banner.jpg')}}" alt="Sport Cart"></a>
                                                         <div class="menu-banner-content">
                                                             <h4>Hot deals</h4>
                                                             <h3>Don't miss<br> Trending</h3>
@@ -384,7 +343,7 @@
                                                     </div>
                                                 </li>
                                             </ul>
-                                        </li>
+                                        </li> -->
                                         <li><a href="blog.html">Blog </a></li>                                    
                                         <li><a href="contact.html">Contact</a></li>
                                         @if(Auth::user() && Auth::user()->user_type == 'ADM')
@@ -418,20 +377,20 @@
                             <div class="header-action-2">
                                 <div class="header-action-icon-2">
                                     <a href="shop-wishlist.php">
-                                        <img alt="Surfside Media" src="{{asset('assets/imgs/theme/icons/icon-heart.svg')}}">
+                                        <img alt="Sport Cart" src="{{asset('assets/imgs/theme/icons/icon-heart.svg')}}">
                                         <span class="pro-count white">4</span>
                                     </a>
                                 </div>
-                                <div class="header-action-icon-2">
-                                    <a class="mini-cart-icon" href="cart.html">
-                                        <img alt="Surfside Media" src="{{asset('assets/imgs/theme/icons/icon-cart.svg')}}">
+                                <!-- <div class="header-action-icon-2">
+                                    <a class="mini-cart-icon" href="{{route('cart')}}">
+                                        <img alt="Sport Cart" src="{{asset('assets/imgs/theme/icons/icon-cart.svg')}}">
                                         <span class="pro-count white">2</span>
                                     </a>
                                     <div class="cart-dropdown-wrap cart-dropdown-hm2">
                                         <ul>
                                             <li>
                                                 <div class="shopping-cart-img">
-                                                    <a href="product-details.html"><img alt="Surfside Media" src="{{asset('assets/imgs/shop/thumbnail-3.jpg')}}"></a>
+                                                    <a href="product-details.html"><img alt="Sport Cart" src="{{asset('assets/imgs/shop/thumbnail-3.jpg')}}"></a>
                                                 </div>
                                                 <div class="shopping-cart-title">
                                                     <h4><a href="product-details.html">Plain Striola Shirts</a></h4>
@@ -443,7 +402,7 @@
                                             </li>
                                             <li>
                                                 <div class="shopping-cart-img">
-                                                    <a href="product-details.html"><img alt="Surfside Media" src="{{asset('assets/imgs/shop/thumbnail-4.jpg')}}"></a>
+                                                    <a href="product-details.html"><img alt="Sport Cart" src="{{asset('assets/imgs/shop/thumbnail-4.jpg')}}"></a>
                                                 </div>
                                                 <div class="shopping-cart-title">
                                                     <h4><a href="product-details.html">Macbook Pro 2022</a></h4>
@@ -459,12 +418,12 @@
                                                 <h4>Total <span>$383.00</span></h4>
                                             </div>
                                             <div class="shopping-cart-button">
-                                                <a href="cart.html">View cart</a>
+                                                <a href="{{route('cart')}}">View cart</a>
                                                 <a href="shop-checkout.php">Checkout</a>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                </div> -->
                                 <div class="header-action-icon-2 d-block d-lg-none">
                                     <div class="burger-icon burger-icon-white">
                                         <span class="burger-icon-top"></span>
@@ -588,7 +547,6 @@
                 </div>
             </div>
         </div>
-        {{-- {{$slot}} --}} 
         @yield('content')
         <footer class="main">
             <section class="newsletter p-30 text-white wow fadeIn animated">
@@ -632,7 +590,7 @@
                                     <strong>Phone: </strong>+1 0000-000-000
                                 </p>
                                 <p class="wow fadeIn animated">
-                                    <strong>Email: </strong>contact@surfsidemedia.in
+                                    <strong>Email: </strong>contact@sportcart.com
                                 </p>
                                 <h5 class="mb-10 mt-30 fw-600 text-grey-4 wow fadeIn animated">Follow Us</h5>
                                 <div class="mobile-social-icon wow fadeIn animated mb-sm-5 mb-md-0">
@@ -676,7 +634,7 @@
                                 </div>
                                 <div class="col-md-4 col-lg-12 mt-md-3 mt-lg-0">
                                     <p class="mb-20 wow fadeIn animated">Secured Payment Gateways</p>
-                                    <img class="wow fadeIn animated" src="asset('assets/imgs/theme/payment-method.png')" alt="">
+                                    <img class="wow fadeIn animated" src="{{asset('assets/imgs/theme/payment-method.png')}}" alt="">
                                 </div>
                             </div>
                         </div>
@@ -695,7 +653,7 @@
                     </div>
                     <div class="col-lg-6">
                         <p class="text-lg-end text-start font-sm text-muted mb-0">
-                            &copy; <strong class="text-brand">SurfsideMedia</strong> All rights reserved
+                            &copy; <strong class="text-brand">SportCart</strong> All rights reserved
                         </p>
                     </div>
                 </div>
@@ -723,6 +681,7 @@
         <script src="{{ asset('assets/js/plugins/jquery.theia.sticky.js') }}"></script>
         <script src="{{ asset('assets/js/plugins/jquery.elevatezoom.js') }}"></script>
         <!-- Template  JS -->
+        @yield('js')
         <script src="{{ asset('assets/js/main.js?v=3.3') }}"></script>
         <script src="{{ asset('assets/js/shop.js?v=3.3') }}"></script>
         

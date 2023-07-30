@@ -17,20 +17,22 @@ Route::get('/taste', function () {
     return view('welcome');
 });
 
-// Route::get('/', WelcomeController::class)->name('home.index');
-// Route::get('/', [WelcomeController::class, 'index']);
 Route::get('/', ['as' => 'homesss','uses' => 'App\Http\Controllers\WelcomeController@index']);
 Route::get('/home', 'App\Http\Controllers\WelcomeController@index')->name('home');
 // Route::get('/', 'App\Http\Controllers\WelcomeController@index');
 
+Route::get('/cart', 'App\Http\Controllers\CartController@cart')->name('cart');
+Route::get('/store-cart/{prdId}/{prdPrice}', 'App\Http\Controllers\CartController@storeCart');
+Route::get('/add-qty/{prdId}', 'App\Http\Controllers\CartController@increaseQuantity');
+Route::get('/subtract-qty/{prdId}', 'App\Http\Controllers\CartController@decreaseQuantity');
+Route::get('/remove-prdct/{prdId}', 'App\Http\Controllers\CartController@removeItem');
+Route::get('/clear-cart', 'App\Http\Controllers\CartController@clearCart');
 
-// Route::get('/shop', ShopComponent::class)->name('shop');
 Route::get('/shop', 'App\Http\Controllers\WelcomeController@shop')->name('shop');
+Route::get('/check-out', 'App\Http\Controllers\WelcomeController@checkOut');
 Route::get('/about', 'App\Http\Controllers\WelcomeController@about')->name('about');
 Route::get('/about-detail', 'App\Http\Controllers\WelcomeController@aboutDetail');
 Route::get('/blog', 'App\Http\Controllers\WelcomeController@blog');
-Route::get('/cart', 'App\Http\Controllers\WelcomeController@cart');
-Route::get('/check-out', 'App\Http\Controllers\WelcomeController@checkOut');
 Route::get('/contact', 'App\Http\Controllers\WelcomeController@contact');
 Route::get('/my-account', 'App\Http\Controllers\WelcomeController@myAccount');
 Route::get('/privacy-policy', 'App\Http\Controllers\WelcomeController@privacyPolicy');

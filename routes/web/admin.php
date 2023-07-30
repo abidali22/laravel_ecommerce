@@ -31,6 +31,7 @@ Route::group(['middleware' => 'auth'], function () {
          */
         Route::group(['middleware' => 'authadmin'], function () {
             Route::get('/', '\App\Http\Controllers\AdminController@adminDashboard')->name('admin.dashboard');
+            Route::get('/categories', '\App\Http\Controllers\AdminController@categories')->name('admin.categories');
         });
     });
     // Route::get('/', ['as' => 'homesss','uses' => 'App\Http\Controllers\WelcomeController@index']);

@@ -95,7 +95,7 @@
                                             <!-- <span class="old-price">$245.8</span> -->
                                         </div>
                                         <div class="product-action-1 show">
-                                            <a aria-label="Add To Cart" class="action-btn hover-up" href="#" wire:click.prevent="store({{$product->id}},'{{$product->name}}',{{$product->regular_price}})"><i class="fi-rs-shopping-bag-add"></i></a>
+                                            <a aria-label="Add To Cart" class="action-btn hover-up" onclick="cartSession({{$product->id}},'{{$product->name}}',{{$product->regular_price}})"><i class="fi-rs-shopping-bag-add"></i></a>
                                         </div>
                                     </div>
                                 </div>
@@ -233,4 +233,16 @@
         </div>
     </section>
 </main>
+@endsection
+
+@section('js')
+    <script type="text/javascript">
+        function cartSession(product_id, product_name, product_price) {
+            // body...+JSON.stringify(jsonObj)
+            var redirectUrl = '/store-cart/'+product_id+'/'+product_price;
+            // console.log(JSON.stringify(product_name));
+            // return false;
+            window.open(redirectUrl,"_self");
+        }
+    </script>
 @endsection

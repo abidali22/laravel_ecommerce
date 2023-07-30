@@ -27,14 +27,6 @@ class WelcomeController extends Controller
                 ->with('result', $result);
     }
 
-    public function store($product_id, $product_name, $product_price)
-    {
-        // code...
-        Cart::add($product_id,$product_name,1,$product_price)->associate('App\Models\Product');
-        session()->flash('success_message','Item added in cart');
-        return redirect()->route('cart');
-    }
-
     //product details
     public function productDetail($slug)
     {
@@ -47,19 +39,6 @@ class WelcomeController extends Controller
               ->with('reltvProducts', $reltvProducts)
               ->with('newProducts', $newProducts);
     }
-
-    // public function render()
-    // {
-    //     $result = Product::where('slug', $this->slug)->first();
-    //     dd($result);
-    //     return view('layouts.components.product_detail',['product' => $result]);
-    // }
-
-    // this is default product detail page
-    // public function productDetail()
-    // {
-    //     return view('layouts.components.product_detail');
-    // }
 
     public function about()
     {
@@ -74,11 +53,6 @@ class WelcomeController extends Controller
     public function blog()
     {
         return view('layouts.components.blog');
-    }
-
-    public function cart()
-    {
-        return view('layouts.components.cart');
     }
 
     public function checkOut()

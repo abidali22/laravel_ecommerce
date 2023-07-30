@@ -23,7 +23,7 @@
                                     <!-- MAIN SLIDES -->
                                     <div class="product-image-slider">
                                         <figure class="border-radius-10">
-                                            <img src="{{asset('assets/imgs/shop/product-')}}{{$product->id}}-2.jpg" alt="product image">
+                                            <img src="{{asset('assets/imgs/shop/product-').$product->id}}-2.jpg" alt="product image">
                                         </figure>
                                         <figure class="border-radius-10">
                                             <img src="{{asset('assets/imgs/shop/product-16-1.jpg')}}" alt="product image">
@@ -129,7 +129,7 @@
                                             <a href="#" class="qty-up"><i class="fi-rs-angle-small-up"></i></a>
                                         </div>
                                         <div class="product-extra-link2">
-                                            <button type="submit" class="button button-add-to-cart">Add to cart</button>
+                                            <button type="submit" class="button button-add-to-cart" onclick="cartSession({{$product->id}},'{{$product->name}}',{{$product->regular_price}})">Add to cart</button>
                                             <a aria-label="Add To Wishlist" class="action-btn hover-up" href="wishlist.php"><i class="fi-rs-heart"></i></a>
                                             <a aria-label="Compare" class="action-btn hover-up" href="compare.php"><i class="fi-rs-shuffle"></i></a>
                                         </div>
@@ -439,8 +439,8 @@
                                             <div class="product-img-action-wrap">
                                                 <div class="product-img product-img-zoom">
                                                     <a href="{{ route('product-datail',['slug'=>$rltData->slug])}}" tabindex="0">
-                                                        <img class="default-img" src="{{asset('assets/imgs/shop/product-')}}{{$rltData->id}}-1.jpg" alt="">
-                                                        <img class="hover-img" src="{{asset('assets/imgs/shop/product-')}}{{$rltData->id}}-2.jpg')}}" alt="">
+                                                        <img class="default-img" src="{{asset('assets/imgs/shop/product-').$rltData->id}}-1.jpg" alt="">
+                                                        <img class="hover-img" src="{{asset('assets/imgs/shop/product-').$rltData->id}}-2.jpg" alt="">
                                                     </a>
                                                 </div>
                                                 <div class="product-action-1">
@@ -630,7 +630,7 @@
                         @foreach($newProducts as $newItems)
                             <div class="single-post clearfix">
                                 <div class="image">
-                                    <img src="{{asset('assets/imgs/shop/thumbnail-')}}{{$newItems->id}}.jpg" alt="#">
+                                    <img src="{{asset('assets/imgs/shop/thumbnail-').$newItems->id}}.jpg" alt="#">
                                 </div>
                                 <div class="content pt-10">
                                     <h5><a href="{{ route('product-datail',['slug'=>$newItems->slug])}}">{{$newItems->name}}</a></h5>
@@ -671,4 +671,13 @@
         </div>
     </section>
 </main>
+@endsection
+
+@section('js')
+    <script type="text/javascript">
+        function cartSession(product_id, product_name, product_price) {
+            var redirectUrl = '/store-cart/'+product_id+'/'+product_price;
+            window.open(redirectUrl,"_self");
+        }
+    </script>
 @endsection
