@@ -17,6 +17,9 @@ return new class extends Migration
             $table->id();
             $table->string('name')->nuique();
             $table->string('slug')->nuique();
+            $table->unsignedInteger('created_by')->default(1);
+            $table->unsignedInteger('modified_by')->default(1);
+            $table->unsignedInteger('deleted_at')->->nullable();
             $table->timestamps();
         });
     }

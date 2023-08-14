@@ -8,18 +8,14 @@ class AdminController extends Controller
 {
     public function __construct()
     {
-        // $this->middleware('auth');
-        // $this->middleware('authadmin');
+        $this->middleware('auth');
+        $this->middleware('authadmin');
     }
 
-    public function adminDashboard()
+    public function dashboard()
     {
+        // dd(route('admin::category.store'));
         return view('dashboard.admin_dashboard');
-    }
-
-    public function categories()
-    {
-        return view('dashboard.admin_categories');
     }
 
     public function userDashboard()

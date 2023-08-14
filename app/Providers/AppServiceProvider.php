@@ -13,7 +13,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->app->bind('App\Constracts\Repositories\Acl\User\UserInterface','App\Constracts\Repositories\Acl\User\UserEloquent');
+        $this->app->bind('App\Constracts\Repositories\Category\CategoryInterface','App\Constracts\Repositories\Category\CategoryEloquent');
     }
 
     /**

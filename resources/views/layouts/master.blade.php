@@ -3,7 +3,12 @@
 
     <head>
         <meta charset="utf-8">
-        <title>Sport Cart</title>
+        <!-- <title>Sport Cart</title> -->
+        <title>
+            @section('title')
+               {{ config('app.name')  }}
+            @show
+        </title>
         <meta http-equiv="x-ua-compatible" content="ie=edge">
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -11,7 +16,7 @@
         <meta property="og:type" content="">
         <meta property="og:url" content="">
         <meta property="og:image" content="">
-        <link rel="shortcut icon" type="image/x-icon" href="assets/imgs/theme/favicon.ico">
+        <link rel="shortcut icon" type="image/x-icon" href="{{asset('assets/imgs/theme/favicon.ico')}}">
         <meta http-equiv="refresh" content="3600;url={{route('logout')}}" />
         <link rel="stylesheet" href="{{ asset('assets/css/main.css') }}">
         <link rel="stylesheet" href="{{ asset('assets/css/custom.css') }}">
@@ -349,9 +354,9 @@
                                         @if(Auth::user() && Auth::user()->user_type == 'ADM')
                                         <li><a href="#">My Account<i class="fi-rs-angle-down"></i></a>
                                             <ul class="sub-menu">
-                                                <li><a href="#">Dashboard</a></li>
+                                                <li><a href="{{route('admin::dashboard')}}">Dashboard</a></li>
                                                 <li><a href="#">Products</a></li>
-                                                <li><a href="#">Categories</a></li>
+                                                <li><a href="{{route('admin::category.index')}}">Categories</a></li>
                                                 <li><a href="#">Coupons</a></li>
                                                 <li><a href="#">Orders</a></li>
                                                 <li><a href="#">Customers</a></li>
@@ -547,6 +552,7 @@
                 </div>
             </div>
         </div>
+        @include('notification')
         @yield('content')
         <footer class="main">
             <section class="newsletter p-30 text-white wow fadeIn animated">

@@ -21,6 +21,9 @@ return new class extends Migration
             $table->string('user_type')->default('USR')->comment('ADM for admin USR for normal user');
             $table->string('password');
             $table->rememberToken();
+            $table->unsignedInteger('created_by')->default(1);
+            $table->unsignedInteger('modified_by')->default(1);
+            $table->unsignedInteger('deleted_at')->->nullable();
             $table->timestamps();
         });
     }
