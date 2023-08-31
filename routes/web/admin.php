@@ -25,6 +25,10 @@ Route::group(['middleware' => 'auth'], function () {
 
   Route::get('/guest', '\App\Http\Controllers\AdminController@userDashboard')->name('user.dashboard');
 
+  Route::get('/card-checkout/{amount}', '\App\Http\Controllers\CheckoutController@cardCheckout');
+
+  Route::get('/crypto-checkout/{amount}', '\App\Http\Controllers\CheckoutController@cryptoCheckout');
+
     Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'as' => 'admin::'], function () {
         /**
          * Admin Access
@@ -32,6 +36,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::group(['middleware' => 'authadmin'], function () {
             Route::get('/', '\App\Http\Controllers\AdminController@dashboard')->name('dashboard');
             Route::resource('category', '\App\Http\Controllers\CategoryController');
+            Route::resource('product', '\App\Http\Controllers\ProductController');
         });
     });
     // Route::get('/', ['as' => 'homesss','uses' => 'App\Http\Controllers\WelcomeController@index']);

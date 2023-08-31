@@ -29,11 +29,11 @@ Route::get('/remove-prdct/{prdId}', 'App\Http\Controllers\CartController@removeI
 Route::get('/clear-cart', 'App\Http\Controllers\CartController@clearCart');
 
 Route::get('/shop', 'App\Http\Controllers\WelcomeController@shop')->name('shop');
-Route::get('/check-out', 'App\Http\Controllers\WelcomeController@checkOut');
+Route::get('/check-out', 'App\Http\Controllers\WelcomeController@checkOut')->name('check-out');
 Route::get('/about', 'App\Http\Controllers\WelcomeController@about')->name('about');
 Route::get('/about-detail', 'App\Http\Controllers\WelcomeController@aboutDetail');
-Route::get('/blog', 'App\Http\Controllers\WelcomeController@blog');
-Route::get('/contact', 'App\Http\Controllers\WelcomeController@contact');
+Route::get('/blog', 'App\Http\Controllers\WelcomeController@blog')->name('blog');
+Route::get('/contact', 'App\Http\Controllers\WelcomeController@contact')->name('contact');
 Route::get('/my-account', 'App\Http\Controllers\WelcomeController@myAccount');
 Route::get('/privacy-policy', 'App\Http\Controllers\WelcomeController@privacyPolicy');
 Route::get('/product-detail/{slug}', 'App\Http\Controllers\WelcomeController@productDetail')->name('product-datail');

@@ -1,39 +1,34 @@
 <?php
 
-namespace App\Constracts\Repositories\Category;
+namespace App\Constracts\Repositories\Product;
 
-use App\Constracts\Repositories\Category\CategoryInterface;
-use App\Models\Category;
+use App\Constracts\Repositories\Product\ProductInterface;
+use App\Models\Product;
 use Auth;
 
-class CategoryEloquent implements CategoryInterface {
+class ProductEloquent implements ProductInterface {
 
-    protected $categoryObj;
+    protected $productObj;
 
-    function __construct(Category $categoryModel) {
-        $this->categoryObj = $categoryModel;
+    function __construct(Product $productModel) {
+        $this->productObj = $productModel;
     }
     
     /** 
-    * @author        Abid 
+    * @author        Abid
     * date           11-01-2021
     * Detail         get users list 
-    * Controller     UserController
+    * Controller     ProductController
     * @return        mix
     */
-    public function getCategoryList(){ 
-        // $query = $this->categoryObj;
-        // if(\Auth::user()->id != 1){
-        //     $query = $query->where('users.id','>',1);
-        // }
-        // $data = $query
-            $categories = $this->categoryObj->orderBy('name', 'desc')->whereNull('deleted_at')->paginate(5);
-        return $categories;
+    public function getProductList(){ 
+        $products = $this->productObj->orderBy('name', 'desc')->whereNull('deleted_at')->paginate(5);
+        return $products;
     }
 
     public function createCategory($data)
     {
-      $category = new $this->categoryObj;
+      $category = new $this->productObj;
       $category->name = $data['name'];
       $category->slug = $data['slug'];
       $category->created_by = Auth::id();
@@ -43,13 +38,13 @@ class CategoryEloquent implements CategoryInterface {
     * @author        Abid 
     * date           11-01-2021
     * Detail         Save user with assign role
-    * Controller     UserController
+    * Controller     ProductController
     * @param         array
     * @return        mix
     */
     public function deleteCategory($categoryId)
     {
-      $categoryRow = $this->categoryObj->find($categoryId);
+      $categoryRow = $this->productObj->find($categoryId);
       $categoryRow->deleted_at = date('Y-m-d H:i:s');
       $categoryRow->modified_by = \Auth::id();
       return $categoryRow->save();
@@ -59,12 +54,12 @@ class CategoryEloquent implements CategoryInterface {
     * @author        Abid 
     * date           11-01-2021
     * Detail         get user by id
-    * Controller     UserController
+    * Controller     ProductController
     * @param         int
     * @return        mix
     */
     public function getCategoryById($id) { 
-        $catId = $this->categoryObj->find($id);
+        $catId = $this->productObj->find($id);
         return $catId;
     }
 
@@ -72,12 +67,12 @@ class CategoryEloquent implements CategoryInterface {
     * @author        Abid 
     * date           11-01-2021
     * Detail         Update User record by user id,
-    * Controller     UserController
+    * Controller     ProductController
     * @param         int, array
     * @return        mix
     */
     public function updateCategory($id, array $data){    
-      $category = $this->categoryObj->findOrFail($id);
+      $category = $this->productObj->findOrFail($id);
       $category->name = $data['name'];
       $category->slug = $data['slug'];
       $category->modified_by = Auth::id();
@@ -89,7 +84,7 @@ class CategoryEloquent implements CategoryInterface {
     * @author        Abid 
     * date           11-01-2021
     * Detail         change user passwrod
-    * Controller     UserController
+    * Controller     ProductController
     * @param         int, array
     * @return        mix
     */

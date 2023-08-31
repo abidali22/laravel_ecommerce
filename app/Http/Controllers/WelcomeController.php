@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use Cart;
+//use Illuminate\Support\Facades\Http;
+// use GuzzleHttp\Client;
 
 class WelcomeController extends Controller
 {
@@ -17,6 +19,14 @@ class WelcomeController extends Controller
 
     public function index()
     {
+    //     $client = Http::get('https://jsonplaceholder.typicode.com/posts');
+    //     // $client = new Client([
+    //     //     // Base URI is used with relative requests
+    //     //     'base_uri' => 'http://httpbin.org',
+    //     //     // You can set any number of default request options.
+    //     //     'timeout'  => 2.0,
+    //     // ]);
+    //     return $client;
         return view('layouts.components.home-component');
     }
 

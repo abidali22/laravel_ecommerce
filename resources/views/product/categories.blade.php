@@ -3,7 +3,7 @@
 @section('css')
 	<style type="text/css">
 		nav svg{
-			height: 20px;
+			height: 20px;	
 		}
 
 		nav .hidden{
@@ -17,7 +17,7 @@
     <div class="page-header breadcrumb-wrap">
         <div class="container">
             <div class="breadcrumb">
-                <a href="{{route('home')}}" rel="nofollow">Home</a>
+                <a href="index.html" rel="nofollow">Home</a>
                 <span></span> All Categories
             </div>
         </div>

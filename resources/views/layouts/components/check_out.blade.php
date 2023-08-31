@@ -1,3 +1,4 @@
+<?php //dd(Cart::total(2, $decimalSeperator, $thousandSeperator)) ?>
 @extends('layouts.master')
 
 @section('content')
@@ -5,7 +6,7 @@
     <div class="page-header breadcrumb-wrap">
         <div class="container">
             <div class="breadcrumb">
-                <a href="index.html" rel="nofollow">Home</a>
+                <a href="{{route('home')}}" rel="nofollow">Home</a>
                 <span></span> Shop
                 <span></span> Checkout
             </div>
@@ -13,6 +14,7 @@
     </div>
     <section class="mt-50 mb-50">
         <div class="container">
+            @if(!Auth::user())
             <div class="row">
                 <div class="col-lg-6 mb-sm-15">
                     <div class="toggle_info">
@@ -45,7 +47,7 @@
                     </div>
                 </div>
                 <div class="col-lg-6">
-                    <div class="toggle_info">
+                   <!--  <div class="toggle_info">
                         <span><i class="fi-rs-label mr-10"></i><span class="text-muted">Have a coupon?</span> <a href="#coupon" data-bs-toggle="collapse" class="collapsed" aria-expanded="false">Click here to enter your code</a></span>
                     </div>
                     <div class="panel-collapse collapse coupon_form " id="coupon">
@@ -60,9 +62,10 @@
                                 </div>
                             </form>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
             </div>
+            @endif
             <div class="row">
                 <div class="col-12">
                     <div class="divider mt-50 mb-50"></div>
@@ -670,43 +673,40 @@
                             <table class="table">
                                 <thead>
                                     <tr>
-                                        <th colspan="2">Product</th>
+                                        <th>Preview</th>
+                                        <th>Product</th>
                                         <th>Total</th>
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    @foreach(Cart::content() as $item)
                                     <tr>
-                                        <td class="image product-thumbnail"><img src="{{asset('assets/imgs/shop/product-1-1.jpg')}}" alt="#"></td>
+                                        <td class="image product-thumbnail"><img src="{{ asset('assets/imgs/shop/product-').$item->id}}-1.jpg" alt="#"></td>
                                         <td>
-                                            <h5><a href="product-details.html">Yidarton Women Summer Blue</a></h5> <span class="product-qty">x 2</span>
+                                            <h5><a href="product-details.html">{{$item->name}}</a></h5> <span class="product-qty">x {{$item->qty}}</span>
                                         </td>
-                                        <td>$180.00</td>
+                                        <td>{{$item->subtotal}}</td>
                                     </tr>
-                                    <tr>
-                                        <td class="image product-thumbnail"><img src="{{asset('assets/imgs/shop/product-2-1.jpg')}}" alt="#"></td>
-                                        <td>
-                                            <h5><a href="product-details.html">LDB MOON Women Summe</a></h5> <span class="product-qty">x 1</span>
-                                        </td>
-                                        <td>$65.00</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="image product-thumbnail"><img src="{{asset('assets/imgs/shop/product-3-1.jpg')}}" alt="#"></td>
-                                        <td><i class="ti-check-box font-small text-muted mr-10"></i>
-                                            <h5><a href="product-details.html">Women's Short Sleeve Loose</a></h5> <span class="product-qty">x 1</span>
-                                        </td>
-                                        <td>$35.00</td>
-                                    </tr>
+                                    @endforeach
+                                    
                                     <tr>
                                         <th>SubTotal</th>
-                                        <td class="product-subtotal" colspan="2">$280.00</td>
+                                        <td></td>
+                                        <td class="product-subtotal">{{Cart::subtotal()}}</td>
                                     </tr>
                                     <tr>
                                         <th>Shipping</th>
-                                        <td colspan="2"><em>Free Shipping</em></td>
+                                        <td colspan="1"><em>Free Shipping</em></td>
+                                        <td>0</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Tax</th>
+                                        <td></td>
+                                        <td><em>{{Cart::tax()}}</em></td>
                                     </tr>
                                     <tr>
                                         <th>Total</th>
-                                        <td colspan="2" class="product-subtotal"><span class="font-xl text-brand fw-900">$280.00</span></td>
+                                        <td colspan="2" class="product-subtotal"><span class="font-xl text-brand fw-900">$ {{Cart::total()}}</span></td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -716,18 +716,34 @@
                             <div class="mb-25">
                                 <h5>Payment</h5>
                             </div>
-                            <div class="payment_option">
-                                <div class="custome-radio">
-                                    <input class="form-check-input" required="" type="radio" name="payment_option" id="exampleRadios3">
-                                    <label class="form-check-label" for="exampleRadios3" data-bs-toggle="collapse" data-target="#cashOnDelivery" aria-controls="cashOnDelivery">Cash On Delivery</label>                                        
+                            <div class="payment_option" style="//display: flex;">
+                                <div class="custome-radio6">
+                                    <a onclick="showHide('quikiDiv')">
+                                        <img src="{{ asset('assets/imgs/payments/quickipay.png')}}" width="150" height="50">
+                                    </a>
+                                    <div id='quikiDiv'>
+                                        <ul style="display: flex; justify-content: center; align-items: center;">
+                                            <li title="CREDIT DEBIT CARD XCP-09" onclick="crdDebCard({{Cart::total(2, null, '')}})"><a><img src="{{ asset('assets/imgs/payments/card.jpg')}}" width="100" height="50"></a></li>
+                                            <li title="CRYPTO C-01" onclick="cryptoCard({{Cart::total(2, null, '')}})"><a><img src="{{ asset('assets/imgs/payments/crypto.png')}}" width="50" height="50"></a></li>
+                                            <li title="BANK CASH SPC-03"><img src="{{ asset('assets/imgs/payments/bank.png')}}" width="50" height="100"></li>
+                                            <li title="BANK ONLINE SPB-04"><img src="{{ asset('assets/imgs/payments/bank.png')}}" width="50" height="100"></li>
+                                            <li title="BANK ONLINE BT-01"><img src="{{ asset('assets/imgs/payments/bank.png')}}" width="50" height="100"></li>
+                                            <li title="BANK ONLINE SPBB-04"><img src="{{ asset('assets/imgs/payments/bank.png')}}" width="50" height="100"></li>
+                                            <li title="BANK ONLINE TB-13"><img src="{{ asset('assets/imgs/payments/bank.png')}}" width="50" height="100"></li>
+                                            <li title="BANK ONLINE CCX-12"><img src="{{ asset('assets/imgs/payments/bank.png')}}" width="50" height="100"></li>
+                                            <li title="BANK CASH   BCD-14"><img src="{{ asset('assets/imgs/payments/bank.png')}}" width="50" height="100"></li>
+                                            <li title="BANK ONLINE XCPP-15"><img src="{{ asset('assets/imgs/payments/bank.png')}}" width="50" height="100"></li>
+                                        </ul>
+                                    </div>
                                 </div>
-                                <div class="custome-radio">
-                                    <input class="form-check-input" required="" type="radio" name="payment_option" id="exampleRadios4">
-                                    <label class="form-check-label" for="exampleRadios4" data-bs-toggle="collapse" data-target="#cardPayment" aria-controls="cardPayment">Card Payment</label>                                        
-                                </div>
-                                <div class="custome-radio">
-                                    <input class="form-check-input" required="" type="radio" name="payment_option" id="exampleRadios5">
-                                    <label class="form-check-label" for="exampleRadios5" data-bs-toggle="collapse" data-target="#paypal" aria-controls="paypal">Paypal</label>                                        
+                                <div class="custome-radio col-md-6">
+
+                                    <a onclick="showHide('codDiv')">
+                                        <img src="{{ asset('assets/imgs/payments/cod.jpg')}}" width="50" height="50">
+                                    </a>
+                                    <div id='codDiv'>
+                                        Cash On Delivery is not available yet.
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -738,4 +754,62 @@
         </div>
     </section>
 </main>
+
+<div class="modal" id="deleteConfirmation">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body bp-30 pt-30">
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        <h4 class="pb-3">Do you want to Delete this Record?</h4>
+                        {!! Form::hidden('hide_val', null, array('id'=>'hidCatId')) !!}
+                        <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#deleteConfirmation">Cancel</button>
+                        <button type="button" class="btn btn-primary" data-token="{{ csrf_token() }}" onclick="deleteCategory()">Delete</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 @endsection
+
+
+@section('js')
+  <script>
+    $(function () {
+      $('#codDiv').hide();
+      $('#quikiDiv').hide();
+    });
+
+    function showHide(idName) {
+        $("#"+idName).slideToggle();
+    }
+
+    function crdDebCard (amount) {
+          $.ajax({
+              url: '/card-checkout/'+amount,
+              type: 'GET',
+              async: false,
+              success: function (data) {
+                console.log('working good'+data);
+            }
+          });
+        }
+
+    function cryptoCard (amount) {
+          $.ajax({
+              url: '/crypto-checkout/'+amount,
+              type: 'GET',
+              async: false,
+              success: function (data) {
+                console.log('working cropto card');
+                console.log(data);
+            }
+          });
+        }
+  </script>
+@stop
+
+
+<!-- <input class="form-check-input" required="" type="radio" name="payment_option" id="exampleRadios6">
+<label class="form-check-label" for="exampleRadios6" data-bs-toggle="collapse" data-target="#paypal" aria-controls="paypal">Quiki Pay</label> -->

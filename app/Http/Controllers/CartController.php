@@ -32,21 +32,12 @@ class CartController extends Controller
     {
         $product_name = Product::where('id',$prodId)->pluck('name','regular_price')->toArray();
         Cart::add($prodId,reset($product_name),1,key($product_name))->associate('App\Models\Product');
-        // dd();
-        // $product = Cart::get($prodId);
-        // $newQty = $product->qty;
-        // Cart::update($prodId, $newQty);
-        // return 'inclrousing '.$newQty;
     }
 
     public function decreaseQuantity($prodId)
     {
         $product_name = Product::where('id',$prodId)->pluck('name','regular_price')->toArray();
         Cart::add($prodId,reset($product_name),-1,key($product_name))->associate('App\Models\Product');
-        // $product = Cart::get($prodId);
-        // $newQty = $product->qty;
-        // Cart::update($prodId, $newQty);
-        // return 'decreasing '.$newQty;
     }
 
     public function removeItem($prodId)

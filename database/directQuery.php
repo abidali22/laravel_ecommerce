@@ -4,3 +4,5 @@ ALTER TABLE `categories` ADD `created_by` INT(10) NOT NULL DEFAULT '1' AFTER `sl
 
 ---- add deleted_at in category
 ALTER TABLE `categories` ADD `deleted_at` TIMESTAMP NULL DEFAULT NULL AFTER `modified_by`;
+
+ALTER TABLE `products` ADD `deleted_at` TIMESTAMP NULL DEFAULT NULL AFTER `category_id`;

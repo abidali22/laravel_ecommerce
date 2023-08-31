@@ -349,13 +349,13 @@
                                                 </li>
                                             </ul>
                                         </li> -->
-                                        <li><a href="blog.html">Blog </a></li>                                    
-                                        <li><a href="contact.html">Contact</a></li>
+                                        <li><a href="{{route('blog')}}">Blog </a></li>
+                                        <li><a href="{{route('contact')}}">Contact</a></li>
                                         @if(Auth::user() && Auth::user()->user_type == 'ADM')
                                         <li><a href="#">My Account<i class="fi-rs-angle-down"></i></a>
                                             <ul class="sub-menu">
                                                 <li><a href="{{route('admin::dashboard')}}">Dashboard</a></li>
-                                                <li><a href="#">Products</a></li>
+                                                <li><a href="{{route('admin::product.index')}}">Products</a></li>
                                                 <li><a href="{{route('admin::category.index')}}">Categories</a></li>
                                                 <li><a href="#">Coupons</a></li>
                                                 <li><a href="#">Orders</a></li>
@@ -514,7 +514,7 @@
                                         </li>
                                     </ul>
                                 </li>
-                                <li class="menu-item-has-children"><span class="menu-expand"></span><a href="blog.html">Blog</a></li>
+                                <li class="menu-item-has-children"><span class="menu-expand"></span><a href="{{route('blog')}}">Blog</a></li>
                                 <li class="menu-item-has-children"><span class="menu-expand"></span><a href="#">Language</a>
                                     <ul class="dropdown">
                                         <li><a href="#">English</a></li>
@@ -529,16 +529,16 @@
                     </div>
                     <div class="mobile-header-info-wrap mobile-header-border">
                         <div class="single-mobile-header-info mt-30">
-                            <a href="contact.html"> Our location </a>
+                            <a href="{{route('contact')}}"> Our location </a>
                         </div>
                         <div class="single-mobile-header-info">
-                            <a href="login.html">Log In </a>                        
-                        </div>
-                        <div class="single-mobile-header-info">                        
-                            <a href="register.html">Sign Up</a>
+                            <a href="{{route('login')}}">Log In </a>
                         </div>
                         <div class="single-mobile-header-info">
-                            <a href="#">(+1) 0000-000-000 </a>
+                            <a href="{{route('register')}}">Sign Up</a>
+                        </div>
+                        <div class="single-mobile-header-info">
+                            <a href="#">(+92) 323-8474-092 </a>
                         </div>
                     </div>
                     <div class="mobile-social-icon">
@@ -611,21 +611,21 @@
                         <div class="col-lg-2 col-md-3">
                             <h5 class="widget-title wow fadeIn animated">About</h5>
                             <ul class="footer-list wow fadeIn animated mb-sm-5 mb-md-0">
-                                <li><a href="#">About Us</a></li>
+                                <li><a href="{{route('about')}}">About Us</a></li>
                                 <li><a href="#">Delivery Information</a></li>
                                 <li><a href="#">Privacy Policy</a></li>
                                 <li><a href="#">Terms &amp; Conditions</a></li>
-                                <li><a href="#">Contact Us</a></li>                            
+                                <li><a href="{{route('contact')}}">Contact Us</a></li>
                             </ul>
                         </div>
                         <div class="col-lg-2  col-md-3">
                             <h5 class="widget-title wow fadeIn animated">My Account</h5>
                             <ul class="footer-list wow fadeIn animated">
                                 <li><a href="my-account.html">My Account</a></li>
-                                <li><a href="#">View Cart</a></li>
-                                <li><a href="#">My Wishlist</a></li>
-                                <li><a href="#">Track My Order</a></li>                            
-                                <li><a href="#">Order</a></li>
+                                <li><a href="{{route('cart')}}">View Cart</a></li>
+                                <li><a href="{{route('cart')}}">My Wishlist</a></li>
+                                <li><a href="{{route('cart')}}">Track My Order</a></li>
+                                <li><a href="{{route('cart')}}">Order</a></li>
                             </ul>
                         </div>
                         <div class="col-lg-4 mob-center">

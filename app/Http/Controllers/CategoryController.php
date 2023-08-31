@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 use App\Http\Requests\CategoryRequest;
 use App\Constracts\Repositories\Category\CategoryInterface;
 // use App\Models\Category;
-use Auth;
 
 class CategoryController extends Controller
 {
@@ -42,17 +41,13 @@ class CategoryController extends Controller
         'name',
         'slug'
       ]);
-      $category = new Category();
-      $category->name = $data['name'];
-      $category->slug = $data['slug'];
-      $category->created_by = Auth::id();
-      $category->save();
+      $this->categoryObj->createCategory($data);
       return redirect()->route('admin::category.create')->with('success', 'Category save successfuly!');
     }
 
     public function edit($id)
     {
-        $catId = Category::find($id);
+        $catId = $this->categoryObj->getCategoryById($id);
         return view('dashboard.edit_category')
                     ->with('categoryRow',$catId);
     }
@@ -63,12 +58,9 @@ class CategoryController extends Controller
         'name',
         'slug'
       ]);
-      $category = new Category();
-      $category->name = $data['name'];
-      $category->slug = $data['slug'];
-      $category->modified_by = Auth::id();
-      $category->save();
-      return redirect()->route('admin::category.index')->with('success', 'Category update successfuly!');
+      if ($this->categoryObj->updateCategory($id, $data)) {
+          return redirect()->route('admin::category.index')->with('success', 'Category update successfuly!');
+      }
     }
 
     public function show($id)
@@ -80,8 +72,10 @@ class CategoryController extends Controller
 
     public function destroy($id)
     {
-        dd('destroy function');
-        $catId = Category::find($id);
-        return view('dashboard.edit_category');
+        if ($this->categoryObj->deleteCategory($id)) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }
