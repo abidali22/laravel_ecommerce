@@ -30,7 +30,7 @@ return new class extends Migration
             $table->bigInteger('category_id')->unsigned()->nullable();
             $table->unsignedInteger('created_by')->default(1);
             $table->unsignedInteger('modified_by')->default(1);
-            $table->unsignedInteger('deleted_at')->->nullable();
+            $table->unsignedInteger('deleted_at')->nullable();
             $table->timestamps();
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
         });
